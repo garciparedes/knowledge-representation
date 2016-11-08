@@ -46,11 +46,55 @@
 %	TEXT
 %-------------------------------------------------------------------------------
 
-	\includegraphics[width=0.9\textwidth]{diagnostic-assistant}
+	\begin{center}
+		\includegraphics[width=0.6\textwidth]{diagnostic-assistant}
+	\end{center}
 
 	\section{Elaborar una base de conocimiento para el asistente al diagnóstico en el dominio del cableado de una vivienda. Las reglas generales deben de permitir codificar la instancia específica que muestra la figura. Utilizar los principios generales para la elaboración de una ontología específica.}
 
+
 		\paragraph{}
+		Vocabulario:
+
+		\paragraph{}
+		Constantes:
+		$CircuitBreaker_i$ \\
+		$Swith_i$ \\
+		$Light_i$ \\
+		$PowerOutlet_i$ \\
+		$Wire_i$ \\
+
+		\paragraph{}
+		Predicados:
+		$Light(x)$ \\
+		$PowerOutlet(x)$ \\
+		$Ok(x)$ \\
+		$Connected(x, y)$ \\
+		$Live(x)$ \\
+		$Ligtht(x)$ \\
+		$Up(x)$ \\
+		$Down(x)$ \\
+
+		\paragraph{}
+		Funciones:
+		$signal(x) = y$ \\
+
+
+
+
+		\paragraph{}
+		Ontología general:
+		\[ On \neq Off \]
+		\[ \forall x [((signal(x) = On) \lor (signal(x) = Off))] \]
+		\[ \forall x \forall y [(Connected(x, y) \supset Connected(y, x))] \]
+		\[ \forall x \forall y [(Connected(x, y) \supset (signal(x) = signal(y)))] \]
+
+		\paragraph{}
+		Ontología específica:
+
+		\[ \forall x [(Light(x) \land OK(x)) \supset (Live(x) \supset Lit(x))] \]
+		\[ \forall x \forall y [(Connected(x,y) \land Live(y)) \supset Live(x)] \]
+
 
 
 	\section{Partiendo de la base de conocimiento del asistente al diagnóstico que hemos utilizado en las prácticas de la asignatura, elaborar la ontología que la soporta. Compararla con la ontología elaborada en el problema anterior.}

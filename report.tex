@@ -89,13 +89,13 @@
 			\begin{itemize}
 
 				%types
-				\item Restricciones de Tipos de Componentes
+				\item Restricciones de Tipos de Componentes:
 				\begin{itemize}
 					\item $ CircuitBreaker \neq Switch\neq Ligth \neq PowerOutlet \neq Wire   $
 					\item $ \forall x [((type(x) = CircuitBreaker) \lor (type(x) = Switch) \lor (type(x) = Ligth) \lor (type(x) = PowerOutlet) \lor (type(x) = Wire))] $
 				\end{itemize}
 				% Connections
-				\item Restricciones de Conexiones.
+				\item Restricciones de Conexiones:
 				\begin{itemize}
 					\item $ On \neq Off $
 					\item $ \forall x [((signal(x) = On) \lor (signal(x) = Off))] $
@@ -104,7 +104,7 @@
 				\end{itemize}
 
 				% Switchess
-				\item Restricciones de Conmutadores.
+				\item Restricciones de Conmutadores:
 				\begin{itemize}
 					\item $ Up \neq Down $
 					\item $ \forall x [( (state(x) = Up) \lor (state(x) = Down))] $
@@ -114,19 +114,19 @@
 				\end{itemize}
 
 				% Circuit Breakers
-				\item Restricciones de diferenciales.
+				\item Restricciones de diferenciales:
 				\begin{itemize}
 					\item $ \forall x \forall y \forall z [( ((type(y) = CircuitBreaker) \land Connected(x, y) \land Connected(y, z) ) \supset Connected(x, z))] $
 				\end{itemize}
 
 				% Lights
-				\item Restricciones de Bombillas.
+				\item Restricciones de Bombillas:
 				\begin{itemize}
 					\item$ \forall x [(((signal(x) = On) \land (type(x) = Light) )  \supset Light(x))] $
 				\end{itemize}
 
 				% Power Outlets
-				\item Restricciones de Enchufes.
+				\item Restricciones de Enchufes:
 				\begin{itemize}
 					\item$ \forall x [(((signal(x) = On) \land (type(x) = PowerOutlet) )  \supset Electrize(x))] $
 				\end{itemize}

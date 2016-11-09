@@ -53,130 +53,114 @@
 	\section{Elaborar una base de conocimiento para el asistente al diagnóstico en el dominio del cableado de una vivienda. Las reglas generales deben de permitir codificar la instancia específica que muestra la figura. Utilizar los principios generales para la elaboración de una ontología específica.}
 
 
-		\paragraph{}
-		Vocabulario: \\
-
-		\paragraph{}
-		Constantes: \\
-		%
-		$On$ y $Off$: Utilizadas para  representan si hay corriente en un componente  \\
-		%
-		$Up$ y $Down$: Utilizadas para representar si un conmutador está en una posición u otra \\
-		%
-		$CircuitBreaker$, $Switch$, $Light$, $PowerOutlet$, $Wire$: Utilizadas para diferenciar los distintos tipos de componentes \\
-		%
-		$CB_i, i \in \{1,2\}$: Cada uno de los diferenciales de la figura. \\
-		$S_i \in \{1,2,3\}$:  Cada uno de los conmutadores de la figura.\\
-		$L_i \in \{1,2\}$: Cada una de las bombillas de la figura. \\
-		$PO_i \in \{1,2\}$: Cada uno de los enchufes de la figura. \\
-		$W_i \in \{1,2,3,4,5,6\}$: Cada uno de los cables de la figura. \\
-		$OutsidePower$: Conexión de corriente externa de la figura. \\
-
-		\paragraph{}
-		Predicados:
-
-		\begin{itemize}
-			\item $Light(x) \equiv$ La variable $x$ luce.
-			\item $Electrize(x) \equiv$ La variable $x$ produce electricidad (para enchufes).
-			\item $Ok(x) \equiv$ La variable $x$ presenta un funcionamiento correcto.
-			\item $Connected(x, y) \equiv$ La variable $x$ está conectada a la variable $y$.
-		\end{itemize}
-
-
-		\paragraph{}
-		Funciones:
-		\begin{itemize}
-			\item $in(x) = y \equiv$ La entrada de $x$ es $y$.
-			\item $out(x,y) = z \equiv$ La salida $y$ de $x$ es  $z$.
-			\item $signal(x) = y \equiv$ La señal de $x$ es  $y $.
-			\item $state(x) = y \equiv$ El estado de $x$ es $y$.
-			\item $type(x) = y \equiv$ El tipo de $x$ es $y$.
-		\end{itemize}
-
-
-
-
-		\paragraph{}
-		Ontología general:
-		\begin{itemize}
-
-			%types
-			\item Restricciones de Tipos de Componentes
+		\subsection{Vocabulario:}
 			\begin{itemize}
-				\item $ CircuitBreaker \neq Switch\neq Ligth \neq PowerOutlet \neq Wire   $
-				\item $ \forall x [((type(x) = CircuitBreaker) \lor (type(x) = Switch) \lor (type(x) = Ligth) \lor (type(x) = PowerOutlet) \lor (type(x) = Wire))] $
-			\end{itemize}
-			% Connections
-			\item Restricciones de Conexiones.
-			\begin{itemize}
-				\item $ On \neq Off $
-				\item $ \forall x [((signal(x) = On) \lor (signal(x) = Off))] $
-				\item $ \forall x \forall y [(Connected(x, y) \supset Connected(y, x))] $
-				\item $ \forall x \forall y [(Connected(x, y) \land Ok(x) \land Ok(y) \supset (signal(x) = signal(y)))] $
+				\item Constantes:
+				\begin{itemize}
+					\item $On$ y $Off$: Utilizadas para  representan si hay corriente en un componente.
+					\item $Up$ y $Down$: Utilizadas para representar si un conmutador está en una posición u otra.
+					\item $CircuitBreaker$, $Switch$, $Light$, $PowerOutlet$, $Wire$: Utilizadas para diferenciar los distintos tipos de componentes.
+					\item $CB_i, i \in \{1,2\}$: Cada uno de los diferenciales de la figura.
+					\item $S_i \in \{1,2,3\}$:  Cada uno de los conmutadores de la figura.
+					\item $L_i \in \{1,2\}$: Cada una de las bombillas de la figura.
+					\item $PO_i \in \{1,2\}$: Cada uno de los enchufes de la figura.
+					\item $W_i \in \{1,2,3,4,5,6\}$: Cada uno de los cables de la figura.
+					\item $OutsidePower$: Conexión de corriente externa de la figura.
+				\end{itemize}
+				\item Predicados:
+				\begin{itemize}
+					\item $Light(x) \equiv$ La variable $x$ luce.
+					\item $Electrize(x) \equiv$ La variable $x$ produce electricidad (para enchufes).
+					\item $Ok(x) \equiv$ La variable $x$ presenta un funcionamiento correcto.
+					\item $Connected(x, y) \equiv$ La variable $x$ está conectada a la variable $y$.
+				\end{itemize}
+				\item Funciones:
+				\begin{itemize}
+					\item $in(x) = y \equiv$ La entrada de $x$ es $y$.
+					\item $out(x,y) = z \equiv$ La salida $y$ de $x$ es  $z$.
+					\item $signal(x) = y \equiv$ La señal de $x$ es  $y $.
+					\item $state(x) = y \equiv$ El estado de $x$ es $y$.
+					\item $type(x) = y \equiv$ El tipo de $x$ es $y$.
+				\end{itemize}
 			\end{itemize}
 
-			% Switchess
-			\item Restricciones de Conmutadores.
+		\subsection{Ontología general:}
+
 			\begin{itemize}
-				\item $ Up \neq Down $
-				\item $ \forall x [( (state(x) = Up) \lor (state(x) = Down))] $
-				\item $ \forall x [( ( (type(x) = Switch) \land (state(x) = Up) ) \supset Connected(in(x), out(x, Up)))] $
-				\item $ \forall x [( ( (type(x) = Switch) \land (state(x) = Down) ) \supset Connected(in(x), out(x, Down)))] $
-				\item $ \forall x [( (type(x) = Switch)  \supset Connected(in(x), out(x)))] $
+
+				%types
+				\item Restricciones de Tipos de Componentes
+				\begin{itemize}
+					\item $ CircuitBreaker \neq Switch\neq Ligth \neq PowerOutlet \neq Wire   $
+					\item $ \forall x [((type(x) = CircuitBreaker) \lor (type(x) = Switch) \lor (type(x) = Ligth) \lor (type(x) = PowerOutlet) \lor (type(x) = Wire))] $
+				\end{itemize}
+				% Connections
+				\item Restricciones de Conexiones.
+				\begin{itemize}
+					\item $ On \neq Off $
+					\item $ \forall x [((signal(x) = On) \lor (signal(x) = Off))] $
+					\item $ \forall x \forall y [(Connected(x, y) \supset Connected(y, x))] $
+					\item $ \forall x \forall y [(Connected(x, y) \land Ok(x) \land Ok(y) \supset (signal(x) = signal(y)))] $
+				\end{itemize}
+
+				% Switchess
+				\item Restricciones de Conmutadores.
+				\begin{itemize}
+					\item $ Up \neq Down $
+					\item $ \forall x [( (state(x) = Up) \lor (state(x) = Down))] $
+					\item $ \forall x [( ( (type(x) = Switch) \land (state(x) = Up) ) \supset Connected(in(x), out(x, Up)))] $
+					\item $ \forall x [( ( (type(x) = Switch) \land (state(x) = Down) ) \supset Connected(in(x), out(x, Down)))] $
+					\item $ \forall x [( (type(x) = Switch)  \supset Connected(in(x), out(x)))] $
+				\end{itemize}
+
+				% Circuit Breakers
+				\item Restricciones de diferenciales.
+				\begin{itemize}
+					\item $ \forall x \forall y \forall z [( ((type(y) = CircuitBreaker) \land Connected(x, y) \land Connected(y, z) ) \supset Connected(x, z))] $
+				\end{itemize}
+
+				% Lights
+				\item Restricciones de Bombillas.
+				\begin{itemize}
+					\item$ \forall x [(((signal(x) = On) \land (type(x) = Light) )  \supset Light(x))] $
+				\end{itemize}
+
+				% Power Outlets
+				\item Restricciones de Enchufes.
+				\begin{itemize}
+					\item$ \forall x [(((signal(x) = On) \land (type(x) = PowerOutlet) )  \supset Electrize(x))] $
+				\end{itemize}
 			\end{itemize}
 
-			% Circuit Breakers
-			\item Restricciones de diferenciales.
+		\subsection{Ontología específica:}
+
 			\begin{itemize}
-				\item $ \forall x \forall y \forall z [( ((type(y) = CircuitBreaker) \land Connected(x, y) \land Connected(y, z) ) \supset Connected(x, z))] $
+				\item $ Ok(x),  x \in \{CB_i, S_j, L_k, PO_l, W_m, OutsidePower\}, i \in \{1,2\}, j \in \{1,2,3\},k \in \{1,2\},l \in \{1,2\},m \in \{1,2,3,4,5,6\}$
+				\item $ type(CB_i) = CircuitBreaker \in \{1,2\} $
+				\item $ type(S_i) = Switch \in \{1,2, 3\} $
+				\item $ type(L_i) = Light \in \{1,2\} $
+				\item $ type(PO_i) = PowerOutlet \in \{1,2\} $
+				\item $ type(W_i) = Wire \in \{1,2, 3, 4, 5, 6\} $
+				\item $ signal(OutsidePower) = On $
+				\item $ state(S_1) = Down $
+				\item $ state(S_2) = Up $
+				\item $ state(S_3) = Up $
+				\item $ Connected(OutsidePower, W_5)$
+				\item $ Connected(W_5, CB_1)$
+				\item $ Connected(W_5, CB_2)$
+				\item $ Connected(CB_1, W_3)$
+				\item $ Connected(CB_2, W_6)$
+				\item $ Connected(W_6, PO_2)$
+				\item $ Connected(W_3, PO_1)$
+				\item $ Connected(W_3, in(S_1))$
+				\item $ Connected(W_3, in(S_3))$
+				\item $ Connected(out(S_3, Up), W_4)$
+				\item $ Connected(W_4, L_2)$
+				\item $ Connected(out(S_1, Up), W_1)$
+				\item $ Connected(out(S_1, Down), W_2)$
+				\item $ Connected(in(S_2), W_0)$
+				\item $ Connected(W_0, L_1)$
 			\end{itemize}
-
-			% Lights
-			\item Restricciones de Bombillas.
-			\begin{itemize}
-				\item$ \forall x [(((signal(x) = On) \land (type(x) = Light) )  \supset Light(x))] $
-			\end{itemize}
-
-			% Power Outlets
-			\item Restricciones de Enchufes.
-			\begin{itemize}
-				\item$ \forall x [(((signal(x) = On) \land (type(x) = PowerOutlet) )  \supset Electrize(x))] $
-			\end{itemize}
-		\end{itemize}
-
-
-
-
-		\paragraph{}
-		Ontología específica:
-
-		\begin{itemize}
-			\item $ Ok(x),  x \in \{CB_i, S_j, L_k, PO_l, W_m, OutsidePower\}, i \in \{1,2\}, j \in \{1,2,3\},k \in \{1,2\},l \in \{1,2\},m \in \{1,2,3,4,5,6\}$
-			\item $ type(CB_i) = CircuitBreaker \in \{1,2\} $
-			\item $ type(S_i) = Switch \in \{1,2, 3\} $
-			\item $ type(L_i) = Light \in \{1,2\} $
-			\item $ type(PO_i) = PowerOutlet \in \{1,2\} $
-			\item $ type(W_i) = Wire \in \{1,2, 3, 4, 5, 6\} $
-			\item $ signal(OutsidePower) = On $
-			\item $ state(S_1) = Down $
-			\item $ state(S_2) = Up $
-			\item $ state(S_3) = Up $
-			\item $ Connected(OutsidePower, W_5)$
-			\item $ Connected(W_5, CB_1)$
-			\item $ Connected(W_5, CB_2)$
-			\item $ Connected(CB_1, W_3)$
-			\item $ Connected(CB_2, W_6)$
-			\item $ Connected(W_6, PO_2)$
-			\item $ Connected(W_3, PO_1)$
-			\item $ Connected(W_3, in(S_1))$
-			\item $ Connected(W_3, in(S_3))$
-			\item $ Connected(out(S_3, Up), W_4)$
-			\item $ Connected(W_4, L_2)$
-			\item $ Connected(out(S_1, Up), W_1)$
-			\item $ Connected(out(S_1, Down), W_2)$
-			\item $ Connected(in(S_2), W_0)$
-			\item $ Connected(W_0, L_1)$
-		\end{itemize}
 
 
 
